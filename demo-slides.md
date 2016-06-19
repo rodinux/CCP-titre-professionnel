@@ -163,7 +163,7 @@ J'ai mis en place une fonction loop (une boucle) en php avec un shortcode, en ut
 J'ai ensuite mis en place le travail effectué sur un serveur mutualisé d'OVH afin de travailler à distance de manière agile avec le client.
 
 ===
-## 4 – Développer une interface Utilisateur 
+### 4 – Développer une interface Utilisateur 
 ### 5 – Développer des composants d'accès aux données
 ///
 Pour cet exemple, je n'ai pas eu grand-chose à faire, puisque le framework Wordpress inclut le nécessaire pour administrer le site. 
@@ -1412,46 +1412,17 @@ Note: app/config/database.yml
 $ rake db:migrate
 ```
 
-* To sart the application locally 
+* To sart the application locally
 
 ```
 $ rails s
 ```
 
 * If you got it without issues you would try the application on this link
-
+ 
 [http://localhost:3000](http://localhost:3000) 
-
 
 ===
 # The END
 ## By Rodolphe Robles
 rodolphe.robles@sfr.fr
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-You always need to migrate the database before running : 
-$ rake db:migrate
-To sart the application locally : 
-$ rails s
-if you got it without issues you would try the application on this link :
-http://localhost:3000
-
