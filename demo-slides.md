@@ -15,16 +15,16 @@
 ///
 Le site de Lamastrock en Wordpress n'était pas responsive design et ne pouvait pas être upgrader sans casser des dépendances, il fallait le reconstruire.
 
-On a proposé des maquettes avec Balsamiq puis sur des feuilles A5 avec comme ligne directrice de réunir différentes pages sur la page d'accueil pour éviter d'avoir à naviguer dans plusieurs pages.
+Nous avons proposé des maquettes avec Balsamiq puis sur des feuilles A5 avec comme ligne directrice de réunir différentes pages sur la page d'accueil pour éviter d'avoir à naviguer dans plusieurs pages.
 ///
 ![plan de la page acceuil](images/Site-restitution-lamastrock-2015.jpg "Restitution page accueil Lamastrock 2015")
 Note: Je n'ai pas garder de version des wireframe avec Balsamiq, après version d'essai, j'ai supprimé ce logiciel privateur.
 ///
-On s'est mis d'accord sur deux mises en page pour l 'accueil et pour les artistes. Nous avons choisi de garder la charte graphique d'une designer qui avait établi une maquette pour un événement culturel organisé par Lamastrock , TerraTempo, en reprennant entre autres les codes des couleurs et des polices.
+Nous nous sommes mis d'accord sur deux mises en page pour l 'accueil et pour les artistes. Nous avons choisi de garder la charte graphique d'une designer qui avait établi une maquette pour un événement culturel organisé par Lamastrock , TerraTempo, en reprennant entre autres les codes des couleurs et des polices.
 ///
 ![Image projet graphique Terr'A tempo](images/graphs-04-small.jpg "Terr'A tempo 2015")
 ///
-J'ai mis en place sur le lieu de formation une machine serveur avec une distribution **Mageia**, la configuration de **Apache** + **Lamp** + **Mysql** pour y installer un framework **Wordpress** en local qui est devenu notre outil de travail et d'élaboration en intranet.
+J'ai mis en place sur le lieu de formation une machine serveur avec une distribution **Mageia**, la configuration de **Apache** + **Lamp** + **Mysql** pour y installer un framework **Wordpress** en local qui est devenue notre outil de travail et d'élaboration en intranet.
 ///
 Configuration pour Apache pour utiliser un dossier public_html en local
 
@@ -75,7 +75,7 @@ Note: etc/apache2/mods-available/php5.conf
 ===
 ## 2 – Concevoir une base de données
 ///
-J'ai  ensuite déposer une version récente de Wordpress. Créé une base de données et un utilisateur pour cette base de données avec phpMyadmin.
+J'ai  ensuite déposé une version récente de Wordpress. Créé une base de données et un utilisateur pour cette base de données avec phpMyadmin.
 ```
 mysql> CREATE DATABASE lamastrosql CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ```
