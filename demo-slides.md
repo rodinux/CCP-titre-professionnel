@@ -145,7 +145,7 @@ J'ai choisi de créer un thème enfant Lamastrockv4 pour personnaliser le site.
 ```
 Note: public_html/wordpress/wp-content/themes/lamastrokv4/stylesheet.css
 ///
-J'ai développé le css et mis en place les extensions qui allait être utiles, customisé le thème de Gigpress avec un nouveau fichier gigpress.css et changer quelques attributs du thème parent pour avoir la taille voulue des images dans le Slider de la page principale.
+J'ai développé le css et mis en place les extensions qui allaient être utiles, customisé le thème de Gigpress avec un nouveau fichier gigpress.css et changé quelques attributs du thème parent pour avoir la taille voulue des images dans le Slider de la page principale.
 ```
 add_filter( 'tc_thumb_size', 'my_thumb_size');
 function my_thumb_size() {
@@ -155,7 +155,7 @@ function my_thumb_size() {
 ```
 Note: public_html/wordpress/wp-content/themes/lamastrokv4/functions.php
 ///
-J'ai mis en place une fonction loop (une boucle) en php avec un shortcode, en utilisant l'extension Shortcode Ultimate, pour automatiquement prendre les images mises à la une d'un article des catégories «artistes» dans une étiquette sur la page principale d'Accueil.
+J'ai mis en place une fonction loop (une boucle) en php avec un shortcode, en utilisant l'extension Shortcode Ultimate, pour prendre automatiquement les images mises à la une d'un article des catégories «artistes» dans des étiquettes sur la page principale d'Accueil.
 ```
 [su_posts template="templates/teaser-loop.php" posts_per_page="18" width="300" height="120" tax_term="5" tax_operator="0" order="desc" orderby="date"]
 ```
@@ -174,14 +174,15 @@ Ceci permet une sécurité supplémentaire et demande aussi une maintenance et u
 # B – Développement de l'application Plannings
 ===
 ## 1- Maquetter une application
-J'ai décidé dès le départ que je voulais arriver à plusieurs vues de calendriers par lieux, pour faciliter l'édition des bénévoles. J'ai créer une application avec Ruby on Rails en utilisant rvm qui permet d'avoir plusieurs versions de Rails sur sa machine
+J'ai décidé dès le départ que je voulais arriver à plusieurs vues de calendriers par lieux, pour faciliter l'édition des bénévoles. J'ai créé une application avec Ruby on Rails en utilisant rvm qui permet d'avoir plusieurs versions de Rails sur sa machine
 ///
 ```
 $ rails new plannings_ecranvillage
 $ rake db:migrate
 ```
+Note: Les premières commandes pour créé une application avec rails 
 ///
-Mon idée avant tout était de me mettre à la place du bénévole qui s'inscrit pour être projectionniste ou pour faire la caisse pour une séance. Comme l'association Écran Village diffuse des films dans divers lieux régulièrement, plus de l'itinérance dans d'autre lieux, ma préoccupation était de facilement choisir sa disponibilité en fonction du lieu, puisque c'est la première chose que regarde un bénévole, les séances ayant cours dans son lieu proche.
+Mon idée avant tout était de me mettre à la place du bénévole qui s'inscrit pour être projectionniste ou pour faire la caisse pour une séance. Comme l'association Écran Village diffuse des films dans divers lieux régulièrement en plus de l'itinérance, ma préoccupation était de facilement choisir sa disponibilité en fonction du   lieu, puisque c'est la première chose que regarde un bénévole, les séances ayant cours dans son lieu proche.
 ///
 J'ai pensé que j'avais besoin de quatre tables principales, la table User des utilisateurs, la table Seance des séances, la table Film pour les films et la table Village pour les lieux.
 ```
@@ -336,8 +337,8 @@ end
 Note: Plannings/app/models/village.rb  
 ///
 Dans ces modèles ci-dessus, on a vu les associations et les contraintes SQL. 
-Si on détruit un film, les séances liées à ce film aussi sont détruites. 
-Les validates ajoutent des contraintes SQL et donc permet d'accélérer les requêtes. L'unicité de l'id et de titrefilm dans l'objet Film est indispensable par la suite pour une méthode d'import des films édités sur le site d’Écran Village.
+Si on détruit un film, les séances liées à ce film sont détruites aussi. 
+Les validates ajoutent des contraintes SQL et donc permettent d'accélérer les requêtes. L'unicité de l'id et de titrefilm dans l'objet Film est indispensable par la suite pour une méthode d'import des films édités sur le site d’Écran Village.
 Ceci permet grâce aux associations de table et aux méthodes de Rails d'utiliser des méthodes comme :
 ``` 
 <%= @seance.village.salle %> = le lieu de la seance
@@ -351,7 +352,7 @@ Ceci permet grâce aux associations de table et aux méthodes de Rails d'utilise
 ## 3 – Mettre en place une base de données
 ///
 Pour l'authentification, j'ai utilisé une gem (librairie) Sorcery. Pour sa mise en place, il fallait supprimer avant la table User, puisque Sorcery a besoin de l'installer.
-Ensuite on créer d'abord l'objet User, mais sans migration de table dans la base de données avec cette commande
+Ensuite on créé d'abord l'objet User, mais sans migration de table dans la base de données avec cette commande
 ``` 
 $ rails g scaffold user email:string crypted_password:string salt:string --migration false
 ```
@@ -382,8 +383,7 @@ class SorceryCore < ActiveRecord::Migration
 
     add_index :users, :email, unique: true
   end
-en
-
+end
 ```
 Note: Plannings/congig/db/migrate/20160121143435_sorcery_core.rb
 ///
@@ -420,12 +420,11 @@ Ensuite on rajoute dans le modèle User la méthode qui appelle l'authentificati
 [...]
    authenticates_with_sorcery!
 [...]
-
 ```
 Note: Plannings/app/models/user.rb
 ///
 Sorcery utilise bcrypt-ruby pour crypter le mot de passe et salt va rajouter un random hash pour rendre plus difficile la possibilité à un attaquant de déchiffrer la cryptographie.  
-
+///
 On doit modifier le contrôleur pour les utilisateurs
 ```
 class UsersController < ApplicationController
@@ -534,7 +533,6 @@ Puis on ajoute la route pour se déconnecter
 ```
 get 'log_in' => 'user_sessions#new', :as => :log_in
 post 'log_out' => 'user_sessions#destroy', :as => :log_out
-
 ```
 Note: Plannings/config/routes.rb
 ///
@@ -551,7 +549,7 @@ end
 ```
 Note: Plannings/app/controllers/application_controller.rb
 ///
-Pour se connecter ensuite j'ai créer la vue du formulaire de connexion. 
+Pour se connecter ensuite j'ai créé la vue du formulaire de connexion. 
 ```
 <p id="notice"><%= flash[:notice] %></p>
 <%= form_tag user_sessions_path, :method => :post do %>  
@@ -570,7 +568,7 @@ Pour se connecter ensuite j'ai créer la vue du formulaire de connexion.
 ```
 Note: Plannings/app/views/users_sessions/_form.html.erb
 ///
-Et dans le block principal de l'application un bouton accordéon pour accéder à l'enregistrement ou la connexion.
+Et dans le block principal de l'application un bouton accordéon pour accéder à l'enregistrement ou à la connexion.
 ```
 <div class="container">
   <nav class="nav navbar-light bg-inverse navbar-nav navbar-left connexion">
@@ -602,11 +600,11 @@ Note: Plannings/app/views/layouts/_connexion.html.erb
 Pour les utilisateurs, j'ai rajouté les colonnes 'username' , 'name', 'telephone' et 'role'.
 ///
 Pour l’autorisation, j'ai ajouté une gem CanCanCan. 
-On créer le modèle des permissions avec la commande 
+n créé le modèle des permissions avec la commande 
 ```
 $ rails g cancan:ability
 ```
-Cela génère le fichier ability.rb où on défini les permissions des utilisateurs
+Cela génère le fichier ability.rb où sont à définir les permissions des utilisateurs.
 ///
 ```
 class Ability
@@ -644,15 +642,15 @@ end
 ```
 Note: Plannings/app/models/ability.rb
 ///
-Il m'a fallu aussi ajouter une table Role 
+Il m'a fallu aussi ajouter u modèle Role 
 ```
 $ rails g model role name
 ```
-  et ajouté une jointure de table.
+et ajouter une jointure de table.
 ```
 $ rails g migration CreateJoinTableUserRole user role
 ```
-Cela créer une association de table avec des colonnes user_id et role_id.
+Cela créé une association de table avec des colonnes user_id et role_id.
 ```
 class CreateJoinTableUserRole < ActiveRecord::Migration
   def change
@@ -673,7 +671,7 @@ end
 ```
 Note: Plannings/app/controllers/application_controller
 ///
-Ensuite, dans le modèle de User, je rajoute les valeurs de la colonne role et choisi d'enregistrer par défaut les nouveaux utilisateurs comme 'guest' (invités).
+Ensuite, dans le modèle de User, je rajoute les valeurs de la colonne role et choisis d'enregistrer par défaut les nouveaux utilisateurs comme 'guest' (invités).
 ```
  authenticates_with_sorcery!
   before_create :setup_default_role_for_new_users
@@ -697,7 +695,7 @@ end
 ```
 Note: Plannings/app/models/user.rb
 ///
-Ensuite dans les vues je peux choisir les permissions avec en utilisant une méthode can? ou  cannot? 
+Ensuite dans les vues je peux choisir les permissions en utilisant les méthodes can? ou  cannot? 
 ```
 [...] 
           <tr>
@@ -725,8 +723,8 @@ Note: exemple, un tableau dans le fichier index des utilisateurs.
 Pour les tables, j'ai ajouté au fur et à mesure des colonnes.
 ![Schéma des controllers](images/models_complete-without-rails-admin.png "Schéma des controlleurs")
 ///
-Entre autres pour noter le nombres d'entrées de la billetterie pour chaque séance.
-Pour les billets des séances j'ai du prévoir que la création d'une séance donne une valeur '0' pour les billets afin de ne pas avoir d'erreurs sql lors d'un update en ajoutant ces lignes au modèle de séance.rb
+Entre autres pour noter le nombre d'entrées de la billetterie pour chaque séance.
+Pour les billets des séances j'ai du prévoir que la valeur des billets soient à égale à '0' afin de ne pas avoir d'erreurs SQL lors d'un create en ajoutant ces lignes au modèle de séance.rb
 ///
 ```
 class Seance < ActiveRecord::Base
@@ -769,7 +767,7 @@ Note: Plannings/app/models/seance.rb
 ///
 J'ai ajouté des librairies pour avoir des aperçus en pdf téléchargeables pour les bénévoles et les employés qui ont l'habitude d'imprimer leur plannings.
 ///
-J'ai configurée l'application en français. J'ai du corriger une erreur du fichier de traduction  trouvé sur Github où les jours étaient décalés (comme le système des  semaines américaines où le premier jour de la semaine est le dimanche).
+J'ai configuré l'application en français. J'ai du corriger une erreur du fichier de traduction  trouvé sur Github où les jours étaient décalés (comme le système des  semaines américaines où le premier jour de la semaine est le dimanche).
 ///
 Pour les pages des calendriers et des séances, j'ai instauré une variable (lieu), on la retrouve dans le helper de séances (plus haut) et au début des vues concernées avec cette ligne
 ```
@@ -839,14 +837,14 @@ Note: Plannings/app/views/layouts/_nav.html.erb
 ===
 ## 4 – Développer une interface Utilisateur
 ///
-J'ai mis en place l'architecture du site pour qu'elle soit le plus cohérente et utile possible.
+J'ai mis en place l'architecture du site pour qu'elle soit la plus cohérente et utile possible.
 (elle a évolué avec les utilisateurs et leurs demandes).
 
 Les formulaires et les pages ont des vues bien précises suivant les permissions.
 
 Les bénévoles ne peuvent éditer que les séances pour s'inscrire comme projectionniste, pour la caisse, inscrire le nombres d'entrées et éditer son profil d'utilisateur. Ils n'accèdent pas aux formulaires des films ou des villages.
 ///
-Quand une séance est éditée, la vue de la séance propose de se revenir à la liste des séances du lieu de la séance pour éviter la liste exhaustive de tous les lieux.
+Quand une séance est éditée, la vue de la séance propose de revenir à la liste des séances du lieu de la séance pour éviter la liste exhaustive de tous les lieux.
 
 Pour l'administrateur, les boutons qui permettent de créer des films, des lieux, des séances ainsi que l'import des séances se trouvent sur la page films. Lorsqu'il édite un film, un lieu ou une séance il est immédiatement redirigé vers la page films sans de nouveau passer par la vue.
 ///
@@ -854,11 +852,11 @@ Pour les séances, il y a plusieurs vues, celles des séances à venir, celle de
 
 Sur les calendriers édition on peut cliquer sur une séance pour l'éditer. 
 ///
-J'ai mis en place la possibilité d'avoir des pages en pdf pour les imprimées avec la gem 'wicked-pdf'. 
+J'ai mis en place la possibilité d'avoir des pages en pdf pour les imprimer avec la gem 'wicked-pdf'. 
 
-Les binaires utilisés pour ces pdf 'wkhtmltopdf' ne sont pas les mêmes sur Heroku que sur le serveur vps, la librairie 'wkhtmltopdf_binary' sur mon serveur privé alors que sur Heroku, il me fallait 'wkhtmltopdf-heroku' qui est un binaire 64bits. J'ai mis longtemps à bien configurer ces pages pdf pour avoir un bon rendu.
+Les binaires utilisés pour ces pdf 'wkhtmltopdf' ne sont pas les mêmes sur Heroku que sur le serveur vps. La librairie sur mon serveur privé est 'wkhtmltopdf_binary' alors que sur Heroku, il me fallait 'wkhtmltopdf-heroku' qui est un binaire 64bits. J'ai mis longtemps à bien configurer ces pages pdf pour avoir un bon rendu.
 ///
-J'ai ajouté une page pour le calcul des entrées par film et par lieu pour facilité le travail de remettre ces résultats chaque fin de semaine an CNC. Un calcul total des séances par lieu aussi qui permet de faire des rapports.
+J'ai ajouté une page pour le calcul des entrées par film et par lieu pour faciliter l'obligation de remettre ces résultats chaque fin de semaine an CNC. Un calcul total des séances par lieu aussi qui permet de faire des rapports.
 
 J'ai mis en place une variable 'range' sur cette page qui permet de choisir le nombre de jours à prendre en compte pour ce calcul.
 ///
@@ -936,7 +934,7 @@ end
 ```
 Note: configuration de la librairie de DatePicker dans rails_admin
 ///
-Pour contourner ce bug, j'ai remis par défaut la date américaine dans les traductions et ajouter des formats de dates pour les vues avec les horaires.
+Pour contourner ce bug, j'ai remis par défaut la date américaine dans les traductions et ajouté des formats de dates pour les vues avec les horaires.
 ```
 […]
   time:
@@ -991,9 +989,9 @@ J'’ai préparé le serveur OVH de Lamastrock pour accueillir le nouveau site e
 ///
 J’ai mis en place un multi-site en Wordpress pour y héberger aussi l'ancien site et un autre site des Doigts de l'Homme géré également par Lamastrock.
 
-Nous avons déplacer l’ancien site v3 dans un sous-répertoire de l’hébergement principal, ensuite on a créer un sous-domaine pointant vers ce répertoire. Puis modifier les urls absolues contenues dans la base de données. (exportation de la base de données avec mysql, réédition manuelle des urls et réimportation de la base de données, il nous fallu changer 129 urls …).
+Nous avons déplacer l’ancien site v3 dans un sous-répertoire de l’hébergement principal, ensuite nous créé un sous-domaine pointant vers ce répertoire. Puis modifié les urls absolues contenues dans la base de données. (exportation de la base de données avec mysql, réédition manuelle des urls et réimportation de la base de données, il nous fallu changer 129 urls …).
 ///
-Dans l'interface d'OVH on a créer un DNS joker (wildcard), c’est à dire que lors de la création on rajoute un sous-domaine avec un *   au domaine principal. Cela implique que tous les sous-domaines créer par la suite pointeront vers le dossier /www du sous-domaine principal ou se trouve le Wordpress multisite d’où il sera possible de gérer plusieurs sites.
+Dans l'interface d'OVH on a créé un DNS joker (wildcard), c’est à dire que lors de la création on rajoute un sous-domaine avec un *   au domaine principal. Cela implique que tous les sous-domaines créés par la suite pointeront vers le dossier /www du sous-domaine principal ou se trouve le Wordpress multisite d’où il sera possible de gérer plusieurs sites.
 ///
 Dans l’onglet outils -> création du réseau de l’interface de Wordpress ensuite on affine les urls, le mappage des autres dossiers qui pointeront vers les autres sites.…
 Pour cela on édite le fichier config.php avec ces lignes
@@ -1009,11 +1007,11 @@ define( 'SUNRISE', 'on' );
 ```
 Note: wordpress/config.php
 ///
-Après on créer un utilisateur super-admin. 
+Après on créé un utilisateur super-admin. 
 
 J'ai utilisé l'extension MU Domain Mapping pour les redirections des différents sites.
 ///
-Il a fallu aussi que rajouter ces lignes au fichier .htacess pour bien rediriger vers www_nom_de_domaine si on ne tape que le nom_de_domaine, et pour les galeries médias du site.
+Il a fallu aussi rajouter ces lignes au fichier .htacess pour bien rediriger vers www_nom_de_domaine si on ne tape que le nom_de_domaine, et pour les galeries médias du site.
 ```
 # BEGIN WordPress
 RewriteEngine On
@@ -1035,7 +1033,7 @@ RewriteRule . index.php [L]
 ```
 Note: wordpress/.htaccess
 ///
-J'ai utiliser l'outil export de Wordpress pour récupérer les données du site en développement et importer toutes les données (dont celles de l'ancien site qui était importées dans ce travail). 
+J'ai utilisé l'outil export de Wordpress pour récupérer les données du site en développement et importer toutes les données (dont celles de l'ancien site qui étaient importées dans ce travail). 
 
 J’ai prévu de bien garder les mêmes urls (les permaliens) pour ne pas perdre le référencement du site.
 
@@ -1135,7 +1133,7 @@ J'ai ajouté une gem 'httparty' qui me permet de récupérer un flux .json.
 En concertation avec Rolf Allard qui gère le site d’Écran Village, j'ai mis en place un bouton pour récupérer les nouveaux films édités sur le site. 
 
 De son côté Rolf Allard a créé une extension Wordpress pour générer un flux .json des articles des films qui appartiennent à une catégorie 'export'.  
-En cliquant sur mon bouton, si un film qui n'existe pas encore dans l'application, il est importé avec son id son titre et sa description.
+En cliquant sur mon bouton, si un film n'existe pas encore dans l'application, il est importé avec son id son titre et sa description.
 ///
 ```
 class FilmsController < ApplicationController
@@ -1187,7 +1185,7 @@ Note: Plannings/app/villages/show.json.builder
 ===
 ## 7 – Mettre en œuvre une solution de gestion de contenu
 ///
-J'ai déployée l'application sur Heroku en premier lieu, elle a été en service assez rapidement pour avoir des retours des utilisateurs qui m'ont permis de la faire évoluée. Je l'ai mise en production sur ce serveur.
+J'ai déployée l'application sur Heroku en premier lieu, elle a été en service assez rapidement pour avoir des retours des utilisateurs qui m'ont permis de la faire évoluer. Je l'ai mise en production sur ce serveur.
 
 Maintenant elle est devenue une version de [Démo](https://planning-ecranvillage.herokuapp.com) sur ce serveur.
 
@@ -1195,7 +1193,7 @@ J'ai pris ensuite l'initiative de la déployée sur un serveur privé VPS d'OVH 
 /// 
 J'ai du configurer le serveur avec rvm, git pour cloner l'application et pouvoir mettre à jour les commits. Nginx pour le serveur, Passenger pour la mettre en production, Postgresql pour la base de données. 
 
-Je me connecte en ssh sur le serveur. J'ai mis en place des mesure de sécurité en fermant certains ports, l'utilisateur root ne peut pas se connecter en ssh, c'est un utilisateur avec des droits sudo et le port ssh n'est pas celui par défaut. 
+Je me connecte en ssh sur le serveur. J'ai mis en place des mesures de sécurité en fermant certains ports, l'utilisateur root ne peut pas se connecter en ssh, c'est un utilisateur avec des droits sudo et le port ssh n'est pas celui par défaut. 
 ///
 J'ai traduit aussi les pages d'erreurs et tout ce que je pouvais. J'ai du aider les utilisateurs qui ne sont pas habitués au numérique à s'inscrire et à utiliser l'application. 
 
@@ -1206,7 +1204,7 @@ L'application est responsive design, en partie grâce à Bootstrap.
 
 J'ai du quand même conséquemment éditer les fichier .css
 ///
-J'ai ajouter un link-to-the-top avec un peu de js et de css pour remonter en haut de page.
+J'ai ajouté un link-to-the-top avec un peu de js et de css pour remonter en haut de page.
 ///
 ```
 var amountScrolled = 300;
