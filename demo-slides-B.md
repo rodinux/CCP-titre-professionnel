@@ -427,7 +427,7 @@ Note: Plannings/app/views/layouts/_connexion.html.erb
 Pour les utilisateurs, j'ai rajouté les colonnes 'username' , 'name', 'telephone' et 'role'.
 ///
 Pour l’autorisation, j'ai ajouté une gem CanCanCan. 
-n créé le modèle des permissions avec la commande 
+Pour créé le modèle et installer Sorcery, on utilise la commande 
 ```
 $ rails g cancan:ability
 ```

@@ -74,6 +74,7 @@
 	   Ensure links are underlined, and consider appending
 	   the URL to the end of the link for usability. */
 	a:link,
+	a;hover
 	a:visited {
 		color: #000 !important;
 		font-weight: bold;
