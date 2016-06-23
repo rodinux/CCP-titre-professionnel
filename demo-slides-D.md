@@ -68,8 +68,7 @@ Ensuite après avoir édité les séances sur l'application, grâce à l'extensi
 Le shortcode regarde la page films.json de l'application pour voir les films, puis la page show/xx.json d'un film ou xx est son id pour connaître les séances d'un film, puis la page villages.json pour connaître les lieux des séances.
 ///
 ```
-date_range  = 2.month.ago..Date.today + 1
-json.array!(@films.where(updated_at: date_range).order(created_at: :desc)) do |film|
+json.array!(@films.films_2_mois_avant) do |film|
   json.extract! film, :id, :titrefilm, :description 
   json.url film_url(film, format: :json) 
 end
@@ -77,8 +76,7 @@ end
 Note: Plannings/app/fims/index.json.builder
 ///
 ```
-date_range  = 1.month.ago..Date.today + 30
-json.array!(@film.seances.where(horaire: date_range).order(horaire: :asc)) do |seance|
+json.array!(@film.seances.seances_1_mois_avant_apres) do |seance|
   json.extract! seance, :id, :film_id, :version, :horaire, :village_id, :statut  
 end
 ```
