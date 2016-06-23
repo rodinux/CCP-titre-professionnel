@@ -286,7 +286,7 @@ get 'login' => 'user_sessions#new', :as => :login
 ```
 Note: Plannings/config/routes.rb
 ///
-Avec Sorcery on ajoute au contrôleur de l'application dans models/application.rb 
+Avec Sorcery on ajoute au modèle de l'application dans models/application.rb 
 ```
 before_action :require_login
 ```
@@ -469,7 +469,7 @@ end
 ```
 Note: Plannings/app/models/ability.rb
 ///
-Il m'a fallu aussi ajouter u modèle Role 
+Il m'a fallu aussi ajouter un modèle Role 
 ```
 $ rails g model role name
 ```
@@ -726,7 +726,7 @@ $ rails c
 ===
 ## 5 – Développer des composants d'accès aux données
 ///
-J'ai mis en place une gem 'rails_admin' qui offre une interface graphique d'administration du site. Puis l'extension 'rails_admin_import' qui permet d'importer des données à pertir de fichiers .json, .cvs ou .xml (il y a déjà une fonction export dans rails_admin).
+J'ai mis en place une gem 'rails_admin' qui offre une interface graphique d'administration du site. Puis l'extension 'rails_admin_import' qui permet d'importer des données à partir de fichiers .json, .cvs ou .xml (il y a déjà une fonction export dans rails_admin).
 
 La difficulté avec cette mise en place fut entre autre la traduction que j'ai de l'application, en particulier du a un bug de l'application pour les dates avec Datepicker qui doivent garder le format américain et qui dans la librairie de rails_admin n'utilisent pas tous les fonctions de strftime.
 ///

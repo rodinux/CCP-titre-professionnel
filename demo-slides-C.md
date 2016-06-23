@@ -2,7 +2,7 @@
 ===
 ## 6 – Développer des pages web en lien avec une base de données
 ///
-J'’ai préparé le serveur OVH de Lamastrock pour accueillir le nouveau site en lui allouant une nouvelle base de données plus conséquente afin de continuer à héberger des anciennes versions du site et un autre site. Le site a été temporairement mis en mode de maintenance pour effectuer la migration.
+J'’ai préparé l'hébergement mutualisé d'OVH de Lamastrock pour accueillir le nouveau site en lui allouant une nouvelle base de données plus conséquente afin de continuer à héberger des anciennes versions du site et un autre site. Le site a été temporairement mis en mode de maintenance pour effectuer la migration.
 
 ===
 ## 7 – Mettre en œuvre une solution de contenu

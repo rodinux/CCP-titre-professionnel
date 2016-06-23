@@ -151,7 +151,7 @@ J'ai mis en place une fonction loop (une boucle) en php avec un shortcode, en ut
 [su_posts template="templates/teaser-loop.php" posts_per_page="18" width="300" height="120" tax_term="5" tax_operator="0" order="desc" orderby="date"]
 ```
 ///
-J'ai ensuite mis en place le travail effectué sur un serveur mutualisé d'OVH afin de travailler à distance de manière agile avec le client.
+J'ai ensuite mis en place le travail effectué sur un hébergement mutualisé d'OVH afin de travailler à distance de manière agile avec le client.
 
 ===
 ### 4 – Développer une interface Utilisateur 
